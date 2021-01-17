@@ -2,7 +2,7 @@
   <div>
     <div class="pt-3 pb-4 pl-4">
       <h3>Shorter Letter</h3> 
-      <h5>Write With Better Words - Help</h5>
+      <h5>Write With Better Words // <span>Help</span></h5>
     </div>
     <div class="row justify-content-between">
       <div class="col-7">
@@ -30,9 +30,6 @@
     </div>
   </div>
 </template>
-
-https://medium.com/js-dojo/hashtag-highlight-textarea-byvue-js-without-draft-js-from-facebook-3ce739b14c4b
-https://github.com/mitsuyacider/vue-hashtag-textarea/blob/master/src/vue-hashtag-textarea.vue
 
 <script>
 import Words from './Words.vue'
