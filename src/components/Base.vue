@@ -2,7 +2,7 @@
   <div>
     <div class="pt-3 pb-4 pl-4">
       <h3>Shorter Letter</h3> 
-      <h5>Write With Better Words</h5>
+      <h5>Write With Better Words - Help</h5>
     </div>
     <div class="row justify-content-between">
       <div class="col-7">
