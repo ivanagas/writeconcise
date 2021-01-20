@@ -4,7 +4,7 @@
         <h4>Highlight</h4>
       </div>
       <div class="row border-bottom">
-        <h5 class="hightlight-btn"><span class="text-muted" @click="exampleWords">Examples</span> <span v-show="keywordList.length" class="text-danger" @click="clear">Clear</span></h5>
+        <h5 class="hightlight-btn"><span class="text-info" @click="exampleWords">Examples</span> <span v-show="keywordList.length" class="text-danger" @click="clear">Clear</span></h5>
       </div>
       <div class='mb-3'>
         <div class="row">
@@ -63,9 +63,9 @@ export default {
       }
     },
     removeKeyword (index) {
-        this.keywordList.splice(index, 1);
-        this.$emit('keywordChange');
-        document.cookie = "keywordList=" + this.keywordList;
+      this.keywordList.splice(index, 1);
+      this.$emit('keywordChange');
+      document.cookie = "keywordList=" + this.keywordList;
     },
     clear () {
       this.keywordList = [];
