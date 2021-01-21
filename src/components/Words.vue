@@ -3,21 +3,21 @@
       <div class="row">
         <h4>Highlight</h4>
       </div>
-      <div class="row border-bottom">
+      <div class="row">
         <h5 class="hightlight-btn"><span class="text-info" @click="exampleWords">Examples</span> <span v-show="keywordList.length" class="text-danger" @click="clear">Clear</span></h5>
       </div>
       <div class='mb-3'>
         <div class="row">
           <input type='text' 
                   placeholder="Enter a word or phrase" 
-                  class='keyword-input__text' 
+                  class='keyword-input__text p-2' 
                   @keydown.enter='addKeyword' 
                   @keydown.188='addKeyword'
                   @blur='addKeyword'
           />
         </div>
         <div class="row">
-          <div v-for='(inputKeyword, index) in keywordList.slice().reverse()' :key='inputKeyword' class='keyword-input__keyword float-left mr-2 rounded'>
+          <div v-for='(inputKeyword, index) in keywordList.slice().reverse()' :key='inputKeyword' class='keyword-input__keyword float-left mr-2 mb-1 rounded'>
               <span @click='removeKeyword(index)'>x</span>
               {{ inputKeyword }}
           </div>
@@ -99,7 +99,8 @@ export default {
 }
 
 .keyword-input__text {
-  border: none;
+  border: 2px solid #17a2b8;
+  border-radius: 5px;
   outline: none;
   font-family: "Helvetica", sans-serif;
   font-size: 20px;

@@ -5,7 +5,7 @@
       <h5 class="text-info">Write With Better Words // <span class="modal-btn" v-b-modal.modal-1>What Is This?</span></h5>
     </div>
     <div class="row justify-content-between">
-      <div class="col-7">
+      <div class="col-md-8 col-lg-7 mb-5">
         <div class="hashtag-textarea">
           <div 
             id="input-overlay"
@@ -17,14 +17,16 @@
               contenteditable="true"
               spellcheck="false"
               placeholder="Write or paste something to get started..."
-              oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''">
+              oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"
+              autofocus="autofocus">
           </div>
         </div>
       </div>
-      <div class="col-3">
+      <div class="col-md-4 col-lg-3 pl-5 pt-4 pr-5 pl-md-0 pt-md-0">
         <words ref="words" @keywordChange="replaceContent"></words>
       </div>
     </div>
+    <div class="row"><br><br></div>
     <div>
       <b-modal id="modal-1" title="What is Shorter Letter?" :ok-only="true">
         <p>Shorter Letter is a tool to help you write better.</p>
@@ -33,7 +35,7 @@
         <p>Any feedback or issues? <a href="mailto:ianvanagas@gmail.com" target="_blank" rel="noopener">Send me an email.</a></p>
       </b-modal>
     </div>
-    <div class="footer fixed-bottom p-2">
+    <div class="d-none d-xl-block footer fixed-bottom p-2">
         <h5 class="float-right"><a href="https://twitter.com/IanVanagas" target="_blank" rel="noopener" class="text-muted">Made by Ian Vanagas</a></h5>
     </div>
   </div>
@@ -100,7 +102,8 @@ export default {
       const srcContent = this.isSafariBrowser ? content : content2
 
       if (this.$refs.words.keywordList.length) {
-        var joinedKeywords = this.$refs.words.keywordList.join('|')
+        var joinedKeywords = this.$refs.words.keywordList.join('\\b|\\b')
+        joinedKeywords = '\\b' + joinedKeywords + '\\b'
         var keywordRegex = new RegExp(joinedKeywords, 'gi')
       }
 
@@ -133,7 +136,7 @@ export default {
     position: relative;
     overflow: auto;
     background: white;
-    min-height: 500px;
+    min-height: 200px;
     height: 100%;
     width: 100%;
     font-family: "Helvetica", sans-serif;
