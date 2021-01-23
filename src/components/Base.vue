@@ -28,11 +28,11 @@
     </div>
     <div class="row"><br><br></div>
     <div>
-      <b-modal id="modal-1" title="What is Shorter Letter?" :ok-only="true">
+      <b-modal id="modal-1" title="What is Shorter Letter?" okVariant="info" :ok-only="true">
         <p>Shorter Letter is a tool to help you write better.</p>
         <p>Type words you don't want to use under <b>Highlight</b>, followed by <b>enter</b> or <b>comma</b> and they are highlighted in the main text.</p> 
         <p>Edit them in the main text to use better words, create better sentences, and make your writing better.</p>
-        <p>Any feedback or issues? <a href="mailto:ianvanagas@gmail.com" target="_blank" rel="noopener">Send me an email.</a></p>
+        <p>Any feedback or issues? <a href="mailto:ianvanagas@gmail.com" class="text-info" target="_blank" rel="noopener">Send me an email.</a></p>
       </b-modal>
     </div>
     <div class="d-none d-xl-block footer fixed-bottom p-2">
