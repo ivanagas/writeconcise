@@ -17,7 +17,7 @@
           />
         </div>
         <div class="row">
-          <div v-for='(inputKeyword, index) in keywordList.slice().reverse()' :key='inputKeyword' class='keyword-input__keyword float-left mr-2 mb-1 rounded'>
+          <div v-for='(inputKeyword, index) in keywordList' :key='inputKeyword' class='keyword-input__keyword float-left mr-2 mb-1 rounded'>
               <span @click='removeKeyword(index)'>x</span>
               {{ inputKeyword }}
           </div>
@@ -53,9 +53,11 @@ export default {
       if (val.length > 0) {
         if (val.includes(", ")) {
           const big = val.split(', ');
-          this.keywordList = this.keywordList.concat(big)
+          this.keywordList = big.concat(this.keywordList)
         } else {
-          this.keywordList.push(val.toLowerCase());
+          if (!this.keywordList.includes(val.toLowerCase())) {
+            this.keywordList.unshift(val.toLowerCase());
+          }
         }
         event.target.value = '';
         this.$emit('keywordChange');
@@ -74,6 +76,12 @@ export default {
     },
     exampleWords () {
       const exWords = ["just", "that", "already", "actual", "think", "pretty", "really", "great", "got", "around", " very ", "thing", "much", "fortunate", "nice", "will", "being", "has", "been", "own", "more", "have", "a little", "in order", "a number of", "who are", "who is", "definitely", "important", "able", "look to", "in the future", "would", "could", "without any", "i believe", "it seems"];
+        for (let i=0; i < this.keywordList.length; i++) {
+          const dupIndex = exWords.indexOf(this.keywordList[i])
+          if (dupIndex > -1) {
+            exWords.splice(dupIndex, 1);
+          }
+        }
       this.keywordList = this.keywordList.concat(exWords)
       this.$emit('keywordChange');
       document.cookie = "keywordList=" + this.keywordList;
