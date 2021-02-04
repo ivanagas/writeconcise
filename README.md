@@ -1,4 +1,4 @@
-# shorterletter
+# Write Concise
 
 ## Project setup
 ```

@@ -75,7 +75,7 @@ export default {
       document.cookie = "keywordList=" + this.keywordList;
     },
     exampleWords () {
-      const exWords = ["just", "that", "already", "actual", "think", "pretty", "really", "great", "got", "around", " very ", "thing", "much", "fortunate", "nice", "will", "being", "has", "been", "own", "more", "have", "a little", "in order", "a number of", "who are", "who is", "definitely", "important", "able", "look to", "in the future", "would", "could", "without any", "i believe", "it seems"];
+      const exWords = ["just", "that", "already", "actual", "think", "pretty", "really", "great", "got", "around", "very", "thing", "much", "fortunate", "nice", "will", "being", "has", "been", "own", "more", "have", "a little", "in order", "a number of", "who are", "who is", "definitely", "important", "able", "look to", "in the future", "would", "could", "without any", "i believe", "it seems"];
         for (let i=0; i < this.keywordList.length; i++) {
           const dupIndex = exWords.indexOf(this.keywordList[i])
           if (dupIndex > -1) {

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="pt-3 pb-4 pl-4">
-      <h3>Shorter Letter</h3> 
-      <h5 class="text-info">Write With Better Words // <span class="modal-btn" v-b-modal.modal-1>What Is This?</span></h5>
+    <div class="pt-4 pb-3 pl-4">
+      <h3>Write Concise</h3> 
+      <h5 class="text-info"><span class="modal-btn" v-b-modal.modal-1>About</span></h5>
     </div>
     <div class="row justify-content-between">
       <div class="col-md-8 col-lg-7 mb-5">
@@ -10,7 +10,12 @@
           <div 
             id="input-overlay"
             class="overlay"
-            />
+            >Write Concise is a tool to help you write better by writing less. 
+            Entering words or phrases under "Highlight" makes it easy to remove or replace them in the text.
+            <br><br>Click "Examples" to try it.
+            <br><br>It is a nice thing to write very clearly.
+            A number of important people think and look to clear writing as pretty great.
+          </div>
           <div id="good-input" 
               class="true-text"
               wrap="soft"
@@ -18,7 +23,11 @@
               spellcheck="false"
               placeholder="Write or paste something to get started..."
               oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"
-              autofocus="autofocus">
+              autofocus="autofocus">Write Concise is a tool to help you write better by writing less. 
+            Entering words or phrases under "Highlight" makes it easy to remove or replace them in the text.
+            <br><br>Click "Examples" to try it.
+            <br><br>It is a nice thing to write very clearly.
+            A number of important people think and look to clear writing as pretty great.
           </div>
         </div>
       </div>
@@ -28,15 +37,17 @@
     </div>
     <div class="row"><br><br></div>
     <div>
-      <b-modal id="modal-1" title="What is Shorter Letter?" okVariant="info" :ok-only="true">
-        <p>Shorter Letter is a tool to help you write better.</p>
-        <p>Type words you don't want to use under <b>Highlight</b>, followed by <b>enter</b> or <b>comma</b> and they are highlighted in the main text.</p> 
-        <p>Edit them in the main text to use better words, create better sentences, and make your writing better.</p>
+      <b-modal id="modal-1" title="What is Write Concise?" okVariant="info" :ok-only="true">
+        <p>Write Concise is a tool to help you write better by writing less based on my editing workflow.</p> 
+        <p>Wondering why and how to write clearly? Read these:</p>
+        <ul>
+          <li><a href="https://www.orwell.ru/library/essays/politics/english/e_polit/" class="text-info" target="_blank" rel="noopener">Politics and the English Language by George Orwell</a></li>
+          <li><a href="https://dilbertblog.typepad.com/the_dilbert_blog/2007/06/the_day_you_bec.html" class="text-info" target="_blank" rel="noopener">The Day You Became A Better Writer by Scott Adams</a></li>
+          <li><a href="http://paulgraham.com/writing44.html" class="text-info" target="_blank" rel="noopener">Writing, Briefly by Paul Graham</a></li>
+        </ul>
+        <p>Write Concise is made by<a href="https://ianvanagas.com/" target="_blank" rel="noopener" class="text-info"> Ian Vanagas</a></p>
         <p>Any feedback or issues? <a href="mailto:ianvanagas@gmail.com" class="text-info" target="_blank" rel="noopener">Send me an email.</a></p>
       </b-modal>
-    </div>
-    <div class="d-none d-xl-block footer fixed-bottom p-2">
-        <h5 class="float-right"><a href="https://twitter.com/IanVanagas" target="_blank" rel="noopener" class="text-muted">Made by Ian Vanagas</a></h5>
     </div>
   </div>
 </template>
