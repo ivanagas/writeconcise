@@ -14,7 +14,8 @@
             Entering words or phrases under "Highlight" makes it easy to remove or replace them in the text.
             <br><br>Click "Examples" to try it.
             <br><br>It is a nice thing to write very clearly.
-            A number of important people think and look to clear writing as pretty great.
+            A number of important people think clear writing is pretty great.
+            I believe Write Concise will definitely improve your writing.
           </div>
           <div id="good-input" 
               class="true-text"
@@ -27,7 +28,8 @@
             Entering words or phrases under "Highlight" makes it easy to remove or replace them in the text.
             <br><br>Click "Examples" to try it.
             <br><br>It is a nice thing to write very clearly.
-            A number of important people think and look to clear writing as pretty great.
+            A number of important people think clear writing is pretty great.
+            I believe Write Concise will definitely improve your writing.
           </div>
         </div>
       </div>
@@ -46,6 +48,7 @@
           <li><a href="http://paulgraham.com/writing44.html" class="text-info" target="_blank" rel="noopener">Writing, Briefly by Paul Graham</a></li>
         </ul>
         <p>Write Concise is made by<a href="https://ianvanagas.com/" target="_blank" rel="noopener" class="text-info"> Ian Vanagas</a></p>
+        <p>We use Cookies to save your keywords for future sessions</p>
         <p>Any feedback or issues? <a href="mailto:ianvanagas@gmail.com" class="text-info" target="_blank" rel="noopener">Send me an email.</a></p>
       </b-modal>
     </div>
@@ -69,7 +72,7 @@ export default {
                     subtree: true
                   };
     observer.observe(target, config);
-
+    this.replaceContent()
     document.querySelector("div[contenteditable]").addEventListener("paste", function(e) {
         e.preventDefault();
         var text = e.clipboardData.getData("text/plain");
