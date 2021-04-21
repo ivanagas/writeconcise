@@ -39,7 +39,7 @@
     </div>
     <div class="row"><br><br></div>
     <div>
-      <b-modal id="modal-1" title="What is Write Concise?" okVariant="info" :ok-only="true">
+      <b-modal id="modal-1" title="What is Write Concise?" hide-footer>
         <p>Write Concise is a tool to help you write better by writing less based on my editing workflow.</p> 
         <p>Wondering why and how to write concisely? Read these:</p>
         <ul>
@@ -79,6 +79,9 @@ export default {
         document.execCommand("insertHTML", false, text);
         this.replaceContent
     });
+    window.onbeforeunload = function() {
+        return "Leaving this page will reset it";
+    };
   },
   methods: {
     onObserveElement(mutations) {
@@ -105,7 +108,6 @@ export default {
 
       // NOTE: Escape html characters
       const content = this.escapeHtml(target.innerText)
-      // const contentHTML = target.textContent
 
       // NOTE: Trim line break code (except Safari browser)
       const spaceExp = /^\n\n/gm
