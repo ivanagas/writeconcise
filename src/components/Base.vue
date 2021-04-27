@@ -48,7 +48,6 @@
           <li><a href="http://paulgraham.com/writing44.html" class="text-info" target="_blank" rel="noopener">Writing, Briefly by Paul Graham</a></li>
         </ul>
         <p>Write Concise is made by <a href="https://ianvanagas.com/" target="_blank" rel="noopener" class="text-info">Ian Vanagas</a></p>
-        <p>We use Cookies to save your keywords for future sessions</p>
         <p>Any feedback or issues? <a href="mailto:ianvanagas@gmail.com" class="text-info" target="_blank" rel="noopener">Send me an email.</a></p>
       </b-modal>
     </div>

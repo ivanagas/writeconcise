@@ -35,15 +35,8 @@ export default {
         }
     },
   created() {
-    const cookies = document.cookie.split('; ')
-    cookies.forEach(item => {
-      if (item.includes('keywordList')) {
-        const preKeywords = item.replace('keywordList=','');
-        if (preKeywords) {
-          this.keywordList = this.keywordList.concat(preKeywords.split(','))
-        }
-      }
-    })
+    const storedKeywords = window.localStorage.getItem('keywordList');
+    this.keywordList = storedKeywords.split(',');
   },
   methods: {
     addKeyword () {
@@ -60,18 +53,18 @@ export default {
         }
         event.target.value = '';
         this.$emit('keywordChange');
-        document.cookie = "keywordList=" + this.keywordList + "; expires=Thu, 18 Dec 2099 12:00:00 UTC";
+        window.localStorage.setItem('keywordList', this.keywordList);
       }
     },
     removeKeyword (index) {
       this.keywordList.splice(index, 1);
       this.$emit('keywordChange');
-      document.cookie = "keywordList=" + this.keywordList + "; expires=Thu, 18 Dec 2099 12:00:00 UTC";
+      window.localStorage.setItem('keywordList', this.keywordList);
     },
     clear () {
       this.keywordList = [];
       this.$emit('keywordChange');
-      document.cookie = "keywordList=" + this.keywordList + "; expires=Thu, 18 Dec 2099 12:00:00 UTC";
+      window.localStorage.setItem('keywordList', this.keywordList);
     },
     exampleWords () {
       const exWords = ["just", "that", "already", "actual", "think", "pretty", "really", "great", "got", "around", "very", "thing", "much", "fortunate", "nice", "will", "being", "has", "been", "own", "more", "have", "a little", "in order", "a number of", "who are", "who is", "definitely", "important", "able", "look to", "in the future", "would", "could", "without any", "i believe", "it seems"];
@@ -83,7 +76,7 @@ export default {
         }
       this.keywordList = this.keywordList.concat(exWords)
       this.$emit('keywordChange');
-      document.cookie = "keywordList=" + this.keywordList + "; expires=Thu, 18 Dec 2099 12:00:00 UTC";
+      window.localStorage.setItem('keywordList', this.keywordList);
     }    
   }
 }
