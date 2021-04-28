@@ -36,7 +36,9 @@ export default {
     },
   created() {
     const storedKeywords = window.localStorage.getItem('keywordList');
-    this.keywordList = storedKeywords.split(',');
+    if (storedKeywords) {
+      this.keywordList = storedKeywords.split(',');
+    }
   },
   methods: {
     addKeyword () {
