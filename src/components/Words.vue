@@ -88,37 +88,35 @@ export default {
 
 <style scoped>
 
-.keyword-input__keyword {
-  height: 100%;
-  background-color: #eee;
-  margin-top: 10px;
-  font-family: "Helvetica", sans-serif;
-  font-size: 20px;
-  line-height: 1.3;
-  padding: 0 5px;
-}
+  .keyword-input__keyword {
+    height: 100%;
+    background-color: #eee;
+    margin-top: 10px;
+    font-family: "Helvetica", sans-serif;
+    font-size: 20px;
+    line-height: 1.3;
+    padding: 0 5px;
+  }
+  .keyword-input__keyword > span {
+    cursor: pointer;
+  }
+  .keyword-input__text {
+    border: 2px solid #17a2b8;
+    border-radius: 5px;
+    outline: none;
+    font-family: "Helvetica", sans-serif;
+    font-size: 20px;
+    line-height: 1.3;
+    background: none;
+  }
 
-.keyword-input__keyword > span {
-  cursor: pointer;
-}
-
-.keyword-input__text {
-  border: 2px solid #17a2b8;
-  border-radius: 5px;
-  outline: none;
-  font-family: "Helvetica", sans-serif;
-  font-size: 20px;
-  line-height: 1.3;
-  background: none;
-}
-
-.hightlight-btn {
-  cursor: pointer;
-}
-.hightlight-btn > span:hover {
-  text-decoration: underline;
-}
-.highlight:hover {
-  text-decoration: underline;
-}
+  .hightlight-btn {
+    cursor: pointer;
+  }
+  .hightlight-btn > span:hover {
+    text-decoration: underline;
+  }
+  .highlight:hover {
+    text-decoration: underline;
+  }
 </style>
