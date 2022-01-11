@@ -35,6 +35,14 @@
       </div>
       <div class="col-md-4 col-lg-3 pl-5 pt-4 pr-5 pl-md-0 pt-md-0">
         <words ref="words" @keywordChange="replaceContent"></words>
+        <div class="row">
+          <h4 v-b-toggle.word-count class="word-count">Word Count</h4>
+        </div>
+        <b-collapse id="word-count">
+          <div class="row">
+            <h5 class="text-info">{{wordCount}}</h5> 
+          </div>
+        </b-collapse>
       </div>
     </div>
     <div class="row"><br><br></div>
@@ -60,6 +68,11 @@ import Words from './Words.vue'
 export default {
   components: {
     Words
+  },
+  data () {
+    return {
+      wordCount: 0
+    }
   },
   mounted() {
     const target = document.getElementById('good-input');
@@ -115,6 +128,9 @@ export default {
       })
       // NOTE: Create new text content
       const srcContent = this.isSafariBrowser ? content : content2
+
+      const wordArray = srcContent.split(' ')
+      this.wordCount = wordArray.length
 
       if (this.$refs.words.keywordList.length) {
         var joinedKeywords = this.$refs.words.keywordList.join('\\b|\\b')
@@ -200,4 +216,8 @@ export default {
   .modal-btn:focus {
      outline: 0;
   }
+
+.word-count:hover {
+  text-decoration: underline;
+}
 </style>
