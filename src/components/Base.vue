@@ -34,8 +34,9 @@
         </div>
       </div>
       <div class="col-md-4 col-lg-3 pl-5 pt-4 pr-5 pl-md-0 pt-md-0">
-        <words ref="words" @keywordChange="replaceContent"></words>
-        <word-count :wordArray="wordArray" />
+        <highlight ref="highlight" @keywordChange="replaceContent" />
+        <uncommon :wordArray="wordArray" class="pb-3" />
+        <word-count :wordArray="wordArray" />       
       </div>
     </div>
     <div class="row"><br><br></div>
@@ -56,12 +57,14 @@
 </template>
 
 <script>
-import Words from './Words.vue'
+import Uncommon from './Uncommon.vue';
 import WordCount from './WordCount.vue';
+import Highlight from './Highlight.vue';
 
 export default {
   components: {
-    Words,
+    Highlight,
+    Uncommon,
     WordCount
   },
   data () {
@@ -126,8 +129,8 @@ export default {
 
       this.wordArray = srcContent.split(' ')
 
-      if (this.$refs.words.keywordList.length) {
-        var joinedKeywords = this.$refs.words.keywordList.join('\\b|\\b')
+      if (this.$refs.highlight.keywordList.length) {
+        var joinedKeywords = this.$refs.highlight.keywordList.join('\\b|\\b')
         joinedKeywords = '\\b' + joinedKeywords + '\\b'
         var keywordRegex = new RegExp(joinedKeywords, 'gi')
       }
@@ -155,7 +158,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .hashtag-textarea {
     position: relative;

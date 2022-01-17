@@ -1,34 +1,39 @@
 <template>
     <div>
       <div class="row">
-        <h4 v-b-toggle.highlight class="highlight">Highlight</h4>
+        <h4>Highlight</h4>
       </div>
-      <b-collapse visible id="highlight">
+      <div class="row">
+        <h5 class="hightlight-btn">
+          <span class="text-info" @click="exampleWords">Examples</span>&nbsp;
+          <span v-show="keywordList.length" class="text-danger" @click="clear">Clear</span>
+        </h5>
+      </div>
+      <div class='mb-3'>
         <div class="row">
-          <h5 class="hightlight-btn"><span class="text-info" @click="exampleWords">Examples</span> <span v-show="keywordList.length" class="text-danger" @click="clear">Clear</span></h5>
+          <input type='text' 
+                  placeholder="Enter a word or phrase" 
+                  class='keyword-input__text p-2' 
+                  @keydown.enter='addKeyword' 
+                  @keydown.188='addKeyword'
+                  @blur='addKeyword'
+          />
         </div>
-        <div class='mb-3'>
-          <div class="row">
-            <input type='text' 
-                    placeholder="Enter a word or phrase" 
-                    class='keyword-input__text p-2' 
-                    @keydown.enter='addKeyword' 
-                    @keydown.188='addKeyword'
-                    @blur='addKeyword'
-            />
-          </div>
-          <div class="row">
-            <div v-for='(inputKeyword, index) in keywordList' :key='inputKeyword' class='keyword-input__keyword float-left mr-2 mb-1 rounded'>
-                <span @click='removeKeyword(index)'>x</span>
-                {{ inputKeyword }}
-            </div>
+        <div class="row">
+          <div v-for='(inputKeyword, index) in keywordList' 
+               :key='inputKeyword' 
+               class='keyword-input__keyword float-left mr-2 mb-1 rounded'
+          >
+            <span @click='removeKeyword(index)'>x</span>
+            {{ inputKeyword }}
           </div>
         </div>
-      </b-collapse>
+      </div>
     </div>
 </template>
 
 <script>
+import EventBus from './eventbus.js'
 
 export default {
   data () {
@@ -42,20 +47,32 @@ export default {
       this.keywordList = storedKeywords.split(',');
     }
   },
+  mounted() {
+    EventBus.$on('highlight', word => {
+      this.addCleanKeyword(word);
+    });
+  },
   methods: {
     addKeyword () {
       event.preventDefault();
       const val = event.target.value.trim();    
       if (val.length > 0) {
         if (val.includes(", ")) {
-          const big = val.split(', ');
-          this.keywordList = big.concat(this.keywordList)
+          const cleanVals = val.split(', ');
+          this.keywordList = cleanVals.concat(this.keywordList)
         } else {
           if (!this.keywordList.includes(val.toLowerCase())) {
             this.keywordList.unshift(val.toLowerCase());
           }
         }
         event.target.value = '';
+        this.$emit('keywordChange');
+        window.localStorage.setItem('keywordList', this.keywordList);
+      }
+    },
+    addCleanKeyword(word) {
+      if (!this.keywordList.includes(word)) {
+        this.keywordList.unshift(word);
         this.$emit('keywordChange');
         window.localStorage.setItem('keywordList', this.keywordList);
       }
@@ -81,7 +98,7 @@ export default {
       this.keywordList = this.keywordList.concat(exWords)
       this.$emit('keywordChange');
       window.localStorage.setItem('keywordList', this.keywordList);
-    }    
+    },
   }
 }
 </script>
@@ -114,9 +131,6 @@ export default {
     cursor: pointer;
   }
   .hightlight-btn > span:hover {
-    text-decoration: underline;
-  }
-  .highlight:hover {
     text-decoration: underline;
   }
 </style>
