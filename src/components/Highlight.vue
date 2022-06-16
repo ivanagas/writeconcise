@@ -5,7 +5,7 @@
       </div>
       <div class="row">
         <h5 class="hightlight-btn">
-          <span class="text-info" @click="exampleWords">Examples</span>&nbsp;
+          <span class="text-info" @click="exampleWords">Try It</span>&nbsp;
           <span v-show="keywordList.length" class="text-danger" @click="clear">Clear</span>
         </h5>
       </div>

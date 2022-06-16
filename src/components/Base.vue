@@ -12,7 +12,7 @@
             class="overlay"
             >Write Concise is a tool to help you write better by writing less. 
             Entering words or phrases under "Highlight" makes it easy to remove or replace them in the text.
-            <br><br>Click "Examples" to try it.
+            <br><br>Click "Try It" see what it looks like on the example below.
             <br><br>It is a nice thing to write very concisely.
             A number of important people think concise writing is pretty great.
             I believe Write Concise will definitely improve your writing.
@@ -26,7 +26,7 @@
               oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"
               autofocus="autofocus">Write Concise is a tool to help you write better by writing less. 
             Entering words or phrases under "Highlight" makes it easy to remove or replace them in the text.
-            <br><br>Click "Examples" to try it.
+            <br><br>Click "Try It" to see what it looks like on the example below.
             <br><br>It is a nice thing to write very concisely.
             A number of important people think concise writing is pretty great.
             I believe Write Concise will definitely improve your writing.
