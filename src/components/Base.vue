@@ -45,9 +45,21 @@
         <p>Write Concise is a tool to help you write better by writing less based on my editing workflow.</p> 
         <p>Wondering why and how to write concisely? Read these:</p>
         <ul>
-          <li><a href="https://www.orwell.ru/library/essays/politics/english/e_polit/" class="text-info" target="_blank" rel="noopener">Politics and the English Language by George Orwell</a></li>
-          <li><a href="https://dilbertblog.typepad.com/the_dilbert_blog/2007/06/the_day_you_bec.html" class="text-info" target="_blank" rel="noopener">The Day You Became A Better Writer by Scott Adams</a></li>
-          <li><a href="http://paulgraham.com/writing44.html" class="text-info" target="_blank" rel="noopener">Writing, Briefly by Paul Graham</a></li>
+          <li>
+            <a href="https://www.orwell.ru/library/essays/politics/english/e_polit/" class="text-info" target="_blank" rel="noopener">
+              Politics and the English Language by George Orwell
+            </a>
+          </li>
+          <li>
+            <a href="https://dilbertblog.typepad.com/the_dilbert_blog/2007/06/the_day_you_bec.html" class="text-info" target="_blank" rel="noopener">
+              The Day You Became A Better Writer by Scott Adams
+            </a>
+          </li>
+          <li>
+            <a href="http://paulgraham.com/writing44.html" class="text-info" target="_blank" rel="noopener">
+              Writing, Briefly by Paul Graham
+            </a>
+          </li>
         </ul>
         <p>Write Concise is made by <a href="https://ianvanagas.com/" target="_blank" rel="noopener" class="text-info">Ian Vanagas</a></p>
         <p>Any feedback or issues? <a href="mailto:ianvanagas@gmail.com" class="text-info" target="_blank" rel="noopener">Send me an email.</a></p>
@@ -76,21 +88,21 @@ export default {
     const target = document.getElementById('good-input');
     const observer = new MutationObserver(this.onObserveElement);
     const config = { 
-                    childList: true, 
-                    characterData: true,
-                    characterDataOldValue: true,
-                    subtree: true
-                  };
+      childList: true, 
+      characterData: true,
+      characterDataOldValue: true,
+      subtree: true
+    };
     observer.observe(target, config);
     this.replaceContent()
     document.querySelector("div[contenteditable]").addEventListener("paste", function(e) {
-        e.preventDefault();
-        var text = e.clipboardData.getData("text/plain");
-        document.execCommand("insertHTML", false, text);
-        this.replaceContent
+      e.preventDefault();
+      var text = e.clipboardData.getData("text/plain");
+      document.execCommand("insertHTML", false, text);
+      this.replaceContent
     });
     window.onbeforeunload = function() {
-        return "Leaving this page will reset it";
+      return "Leaving this page will reset it";
     };
   },
   methods: {
@@ -98,12 +110,12 @@ export default {
       mutations.forEach((mutation) => {
         const type = mutation.type
         switch(type) {
-          // NOTE: on change of any text input
+          // On change of any text input
           case 'characterData':
             this.replaceContent()
             break;
           
-          // NOTE: Line break is occured
+          // Line break is occured
           case 'childList':
             this.replaceContent()
             break;
@@ -116,15 +128,15 @@ export default {
     replaceContent() {
       const target = document.getElementById('good-input');
 
-      // NOTE: Escape html characters
+      // Escape html characters
       const content = this.escapeHtml(target.innerText)
 
-      // NOTE: Trim line break code (except Safari browser)
+      // Trim line break code (except Safari browser)
       const spaceExp = /^\n\n/gm
       const content2 = content.replace(spaceExp, function() {
         return '\n'
       })
-      // NOTE: Create new text content
+      // Create new text content
       const srcContent = this.isSafariBrowser ? content : content2
 
       this.wordArray = srcContent.split(' ')
@@ -135,7 +147,7 @@ export default {
         var keywordRegex = new RegExp(joinedKeywords, 'gi')
       }
 
-      // NOTE: Enclose hashtag by <i> tag
+      // Enclose by <span> tag
       const replaceContent = srcContent.replace(keywordRegex, function(match) {
         const result = '<span class="text-danger border-bottom border-danger">' + match + '</span>'
         return result
