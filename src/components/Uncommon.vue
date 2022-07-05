@@ -2,10 +2,11 @@
   <div>
     <div class="row">
       <h4>Uncommon Words</h4>
-      <div v-for="word in mostUncommon" 
-          :key="word[0]"
-          @click="addHighlight(word[0])" 
-          class='uncommon-word underline float-left mr-2 mb-1 rounded'
+      <div 
+        v-for="word in mostUncommon" 
+        :key="word[0]"
+        @click="addHighlight(word[0])" 
+        class='uncommon-word underline float-left mr-2 mb-1 rounded'
       >
         + {{ word[0] }} ({{word[1]}})
       </div>
