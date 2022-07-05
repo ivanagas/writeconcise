@@ -95,11 +95,12 @@ export default {
     };
     observer.observe(target, config);
     this.replaceContent()
+    
     document.querySelector("div[contenteditable]").addEventListener("paste", function(e) {
       e.preventDefault();
       var text = e.clipboardData.getData("text/plain");
       document.execCommand("insertHTML", false, text);
-      this.replaceContent
+      this.replaceContent()
     });
     window.onbeforeunload = function() {
       return "Leaving this page will reset it";
