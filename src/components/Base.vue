@@ -17,14 +17,16 @@
             A number of important people think concise writing is pretty great.
             I believe Write Concise will definitely improve your writing.
           </div>
-          <div id="good-input" 
-              class="true-text"
-              wrap="soft"
-              contenteditable="true"
-              spellcheck="false"
-              placeholder="Write or paste something to get started..."
-              oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"
-              autofocus="autofocus">Write Concise is a tool to help you write better by writing less. 
+          <div 
+            id="good-input" 
+            class="true-text"
+            wrap="soft"
+            contenteditable="true"
+            spellcheck="false"
+            placeholder="Write or paste something to get started..."
+            oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"
+            autofocus="autofocus"
+            >Write Concise is a tool to help you write better by writing less. 
             Entering words or phrases under "Highlight" makes it easy to remove or replace them in the text.
             <br><br>Click "Try It" to see what it looks like on the example below.
             <br><br>It is a nice thing to write very concisely.
@@ -37,6 +39,7 @@
         <highlight ref="highlight" @keywordChange="replaceContent" />
         <uncommon :wordArray="wordArray" class="pb-3" />
         <word-count :wordArray="wordArray" />       
+        <contractions ref="contractions" @checkContractions="replaceContent" />
       </div>
     </div>
     <div class="row"><br><br></div>
@@ -49,13 +52,15 @@ import Uncommon from './Uncommon.vue';
 import WordCount from './WordCount.vue';
 import Highlight from './Highlight.vue';
 import Modal from './Modal.vue';
+import Contractions from './Contractions.vue';
 
 export default {
   components: {
     Highlight,
     Uncommon,
     WordCount,
-    Modal
+    Modal,
+    Contractions
   },
   data () {
     return {
@@ -74,12 +79,14 @@ export default {
     observer.observe(target, config);
     this.replaceContent()
     
+    // Listen for pasted content
     document.querySelector("div[contenteditable]").addEventListener("paste", function(e) {
       e.preventDefault();
       var text = e.clipboardData.getData("text/plain");
       document.execCommand("insertHTML", false, text);
       this.replaceContent()
     });
+    
     window.onbeforeunload = function() {
       return "Leaving this page will reset it";
     };
@@ -126,11 +133,22 @@ export default {
         var keywordRegex = new RegExp(joinedKeywords, 'gi')
       }
 
-      // Enclose by <span> tag
-      const replaceContent = srcContent.replace(keywordRegex, function(match) {
+      // Enclose keywords in red underlined <span> tag
+      let replaceContent = srcContent.replace(keywordRegex, function(match) {
         const result = '<span class="text-danger border-bottom border-danger">' + match + '</span>'
         return result
       })
+
+      // If highlighting contractions is active
+      // Enclose contractions in a yellow underlined <span> tag
+      if (this.$refs.contractions.highlight) {
+        var contractionRegex = new RegExp(/\b\w+'\w+\b/, 'gi')
+        replaceContent = replaceContent.replace(contractionRegex, function(match) {
+          const result = '<span class="text-warning border-bottom border-warning">' + match + '</span>'
+          return result
+        })
+      }
+  
       const insertNode = document.getElementById('input-overlay')
       insertNode.innerHTML = replaceContent
     },
@@ -201,6 +219,6 @@ export default {
   }
 
   .modal-btn:focus {
-     outline: 0;
+    outline: 0;
   }
 </style>

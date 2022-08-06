@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <h4>Uncommon Words</h4>
+      <h4 class="col-md-12 pl-0">Uncommon Words</h4><br>
       <div 
         v-for="word in mostUncommon" 
         :key="word[0]"
