@@ -1,6 +1,6 @@
 {
-  "name": "shorterletter",
-  "version": "0.1.0",
+  "name": "writeconcise",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -42,6 +42,6 @@
     "last 2 versions",
     "not dead"
   ],
-  "_id": "shorterletter@0.1.0",
+  "_id": "writerconcise@0.1.1",
   "readme": "ERROR: No README data found!"
 }
