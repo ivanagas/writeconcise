@@ -142,7 +142,7 @@ export default {
       // If highlighting contractions is active
       // Enclose contractions in a yellow underlined <span> tag
       if (this.$refs.contractions.highlight) {
-        var contractionRegex = new RegExp(/\b\w+'\w+\b/, 'gi')
+        var contractionRegex = new RegExp(/\b\w+('|’)\w+\b/, 'gi')
         replaceContent = replaceContent.replace(contractionRegex, function(match) {
           const result = '<span class="text-warning border-bottom border-warning">' + match + '</span>'
           return result
