@@ -38,7 +38,10 @@
       <div class="col-md-4 col-lg-3 pl-5 pt-4 pr-5 pl-md-0 pt-md-0">
         <highlight ref="highlight" @keywordChange="replaceContent" />
         <uncommon :wordArray="wordArray" class="pb-3" />
-        <word-count :wordArray="wordArray" :highlightedWordCount="highlightedWordCount" />       
+        <word-count 
+          :wordArray="wordArray"
+          :highlightedWordCount="highlightedWordCount"
+        />       
         <contractions ref="contractions" @checkContractions="replaceContent" />
       </div>
     </div>
@@ -133,8 +136,7 @@ export default {
         joinedKeywords = '\\b' + joinedKeywords + '\\b'
         var keywordRegex = new RegExp(joinedKeywords, 'gi')
       }
-      console.log(this.highlightedWordCount)
-      this.highlightedWordCount = 0
+
       // Enclose keywords in red underlined <span> tag
       let replaceContent = srcContent.replace(keywordRegex, function(match) {
         const result = '<span class="text-danger border-bottom border-danger">' + match + '</span>'
