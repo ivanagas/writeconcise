@@ -5,7 +5,10 @@
     </div>
       <b-collapse id="word-count">
         <div class="row">
-          <h5 class="text-info">{{wordCount}}</h5> 
+          <h5>Total: <span class="text-info">{{wordCount}}</span></h5> 
+        </div>
+        <div class="row">
+          <h5>Highlighted: <span class="text-info">{{highlightedWordCount}}</span></h5> 
         </div>
       </b-collapse>
   </div>
@@ -13,7 +16,7 @@
 
 <script>
 export default {
-  props: ['wordArray'],
+  props: ['wordArray', 'highlightedWordCount'],
   data () {
     return {
       wordCount: 0

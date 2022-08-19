@@ -15,7 +15,9 @@
             @change="flipSwitch()"
           >
           <label class="custom-control-label" for="switch">
-            Highlight
+            <h5>
+              Highlight
+            </h5>
           </label>
         </div>
       </div>
