@@ -42,7 +42,7 @@
           :wordArray="wordArray"
           :highlightedWordCount="highlightedWordCount"
         />       
-        <contractions ref="contractions" @checkContractions="replaceContent" />
+        <checks ref="checks" @checkContent="replaceContent" />
       </div>
     </div>
     <div class="row"><br><br></div>
@@ -55,7 +55,7 @@ import Uncommon from './Uncommon.vue';
 import WordCount from './WordCount.vue';
 import Highlight from './Highlight.vue';
 import Modal from './Modal.vue';
-import Contractions from './Contractions.vue';
+import Checks from './Checks.vue';
 
 export default {
   components: {
@@ -63,7 +63,7 @@ export default {
     Uncommon,
     WordCount,
     Modal,
-    Contractions
+    Checks
   },
   data () {
     return {
@@ -127,28 +127,39 @@ export default {
         return '\n'
       })
       // Create new text content
-      const srcContent = this.isSafariBrowser ? content : content2
+      let replaceContent = this.isSafariBrowser ? content : content2
 
-      this.wordArray = srcContent.split(' ')
+      this.wordArray = replaceContent.split(' ')
 
+      // If highlighting contractions is active
+      // Enclose contractions in a yellow underlined <span> tag
+      if (this.$refs.checks.highlightContractions) {
+        var contractionRegex = new RegExp(/\b\w+('|’)\w+\b/, 'gi')
+        replaceContent = replaceContent.replace(contractionRegex, function(match) {
+          const result = '<span class="text-warning border-bottom border-warning">' + match + '</span>'
+          return result
+        })
+      }
+
+      // If highlighting "-ly" Words is active
+      // Enclose "-ly" Words in a yellow underlined <span> tag
+      if (this.$refs.checks.highlightLyWords) {
+        var lyRegex = new RegExp(/\b\w+ly/, 'gi')
+        replaceContent = replaceContent.replace(lyRegex, function(match) {
+          const result = '<span class="text-warning border-bottom border-warning">' + match + '</span>'
+          return result
+        })
+      }
+
+      // If there are highlight keywords
+      // Enclose keywords in red underlined <span> tag
       if (this.$refs.highlight.keywordList.length) {
         var joinedKeywords = this.$refs.highlight.keywordList.join('\\b|\\b')
         joinedKeywords = '\\b' + joinedKeywords + '\\b'
         var keywordRegex = new RegExp(joinedKeywords, 'gi')
-      }
 
-      // Enclose keywords in red underlined <span> tag
-      let replaceContent = srcContent.replace(keywordRegex, function(match) {
-        const result = '<span class="text-danger border-bottom border-danger">' + match + '</span>'
-        return result
-      })
-
-      // If highlighting contractions is active
-      // Enclose contractions in a yellow underlined <span> tag
-      if (this.$refs.contractions.highlight) {
-        var contractionRegex = new RegExp(/\b\w+('|’)\w+\b/, 'gi')
-        replaceContent = replaceContent.replace(contractionRegex, function(match) {
-          const result = '<span class="text-warning border-bottom border-warning">' + match + '</span>'
+        replaceContent = replaceContent.replace(keywordRegex, function(match) {
+          const result = '<span class="text-danger border-bottom border-danger">' + match + '</span>'
           return result
         })
       }
