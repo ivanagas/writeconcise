@@ -38,7 +38,10 @@
       <div class="col-md-4 col-lg-3 pl-5 pt-4 pr-5 pl-md-0 pt-md-0">
         <highlight ref="highlight" @keywordChange="replaceContent" />
         <uncommon :wordArray="wordArray" class="pb-3" />
-        <word-count :wordArray="wordArray" />       
+        <word-count 
+          :wordArray="wordArray"
+          :highlightedWordCount="highlightedWordCount"
+        />       
         <contractions ref="contractions" @checkContractions="replaceContent" />
       </div>
     </div>
@@ -64,7 +67,8 @@ export default {
   },
   data () {
     return {
-      wordArray: []
+      wordArray: [],
+      highlightedWordCount: 0
     }
   },
   mounted() {
@@ -151,6 +155,18 @@ export default {
   
       const insertNode = document.getElementById('input-overlay')
       insertNode.innerHTML = replaceContent
+      
+      // Count number of words highlighted
+      if (this.$refs.highlight.keywordList.length == 0) {
+        this.highlightedWordCount = 0
+      }
+      if (this.$refs.highlight.keywordList.length) {
+        const count = (str) => {
+          return ((str || '').match(keywordRegex) || []).length
+        }
+        this.highlightedWordCount = count(replaceContent)
+      }
+
     },
     escapeHtml(content) {
       const escapeHashMap = {
