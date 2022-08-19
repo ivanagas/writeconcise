@@ -155,11 +155,17 @@ export default {
   
       const insertNode = document.getElementById('input-overlay')
       insertNode.innerHTML = replaceContent
-
-      const count = (str) => {
-        return ((str || '').match(keywordRegex) || []).length
+      
+      // Count number of words highlighted
+      if (this.$refs.highlight.keywordList.length == 0) {
+        this.highlightedWordCount = 0
       }
-      this.highlightedWordCount = count(replaceContent)
+      if (this.$refs.highlight.keywordList.length) {
+        const count = (str) => {
+          return ((str || '').match(keywordRegex) || []).length
+        }
+        this.highlightedWordCount = count(replaceContent)
+      }
 
     },
     escapeHtml(content) {
