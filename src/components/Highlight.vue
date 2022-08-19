@@ -9,7 +9,13 @@
         <div class="row">
           <h5 class="hightlight-btn">
             <span class="text-info" @click="exampleWords">Try It</span>&nbsp;
-            <span v-show="keywordList.length" class="text-danger" @click="clear">Clear</span>
+            <span 
+              v-show="keywordList.length" 
+              class="text-danger" 
+              @click="clear"
+            >
+              Clear
+            </span>
           </h5>
         </div>
         <div class='mb-3'>
