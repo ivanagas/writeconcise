@@ -37,7 +37,7 @@
       </div>
       <div class="col-md-4 col-lg-3 pl-5 pt-4 pr-5 pl-md-0 pt-md-0">
         <highlight ref="highlight" @keywordChange="replaceContent" />
-        <uncommon :wordArray="wordArray" class="pb-3" />
+        <uncommon :wordArray="wordArray" />
         <word-count 
           :wordArray="wordArray"
           :highlightedWordCount="highlightedWordCount"

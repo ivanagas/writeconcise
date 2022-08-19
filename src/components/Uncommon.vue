@@ -1,16 +1,22 @@
 <template>
   <div>
     <div class="row">
-      <h4 class="col-md-12 pl-0">Uncommon Words</h4><br>
-      <div 
-        v-for="word in mostUncommon" 
-        :key="word[0]"
-        @click="addHighlight(word[0])" 
-        class='uncommon-word underline float-left mr-2 mb-1 rounded'
-      >
-        + {{ word[0] }} ({{word[1]}})
-      </div>
+      <h4 v-b-toggle.uncommon class="underline">
+        Uncommon Words
+      </h4>
     </div>
+    <b-collapse visible id="uncommon">
+      <div class="row pb-3">
+        <div 
+          v-for="word in mostUncommon" 
+          :key="word[0]"
+          @click="addHighlight(word[0])" 
+          class='uncommon-word underline float-left mr-2 mb-1 rounded'
+        >
+          + {{ word[0] }} ({{word[1]}})
+        </div>
+      </div>
+    </b-collapse>
   </div>
 </template>
 
