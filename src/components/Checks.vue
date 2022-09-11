@@ -9,9 +9,10 @@
       <div class="row">
         <div class="custom-control custom-switch">
           <input 
-            type="checkbox" 
-            class="custom-control-input" 
-            id="contractionSwitch" 
+            type="checkbox"
+            class="custom-control-input"
+            id="contractionSwitch"
+            v-model="highlightContractions"
             @change="flipContractions()"
           >
           <label class="custom-control-label" for="contractionSwitch">
@@ -26,7 +27,8 @@
           <input 
             type="checkbox" 
             class="custom-control-input" 
-            id="lyWordsSwitch" 
+            id="lyWordsSwitch"
+            v-model="highlightLyWords"
             @change="flipLyWords()"
           >
           <label class="custom-control-label" for="lyWordsSwitch">
@@ -48,14 +50,27 @@ export default {
       highlightLyWords: false
     }
   },
+  created() {
+    // Set settings based on local storage values (converted from strings)
+    this.highlightContractions = (
+      window.localStorage.getItem('highlightContractions') === 'true'
+    );
+    this.highlightLyWords = (
+      window.localStorage.getItem('highlightLyWords') === 'true'
+    );
+  },
   methods: {
     flipContractions() {
-      this.highlightContractions = !this.highlightContractions
       this.$emit('checkContent');
+      window.localStorage.setItem(
+        'highlightContractions', this.highlightContractions
+      );
     },
     flipLyWords() {
-      this.highlightLyWords = !this.highlightLyWords
       this.$emit('checkContent');
+      window.localStorage.setItem(
+        'highlightLyWords', this.highlightLyWords
+      );
     }
   }
 }

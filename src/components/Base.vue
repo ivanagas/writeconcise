@@ -41,7 +41,7 @@
         <word-count 
           :wordArray="wordArray"
           :highlightedWordCount="highlightedWordCount"
-        />       
+        />
         <checks ref="checks" @checkContent="replaceContent" />
       </div>
     </div>
