@@ -52,17 +52,25 @@ export default {
   },
   created() {
     // Set settings based on local storage values (converted from strings)
-    this.highlightContractions = (window.localStorage.getItem('highlightContractions') === 'true');
-    this.highlightLyWords = (window.localStorage.getItem('highlightLyWords') === 'true');
+    this.highlightContractions = (
+      window.localStorage.getItem('highlightContractions') === 'true'
+    );
+    this.highlightLyWords = (
+      window.localStorage.getItem('highlightLyWords') === 'true'
+    );
   },
   methods: {
     flipContractions() {
       this.$emit('checkContent');
-      window.localStorage.setItem('highlightContractions', this.highlightContractions);
+      window.localStorage.setItem(
+        'highlightContractions', this.highlightContractions
+      );
     },
     flipLyWords() {
       this.$emit('checkContent');
-      window.localStorage.setItem('highlightLyWords', this.highlightLyWords);
+      window.localStorage.setItem(
+        'highlightLyWords', this.highlightLyWords
+      );
     }
   }
 }
