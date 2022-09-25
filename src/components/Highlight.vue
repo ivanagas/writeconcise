@@ -80,6 +80,9 @@ export default {
         event.target.value = '';
         this.$emit('keywordChange');
         window.localStorage.setItem('keywordList', this.keywordList);
+        if (!window.location.href.includes('localhost:8080')) {
+          this.$posthog.capture('keyword added', { word: val.toLowerCase() })
+        }
       }
     },
     addCleanKeyword(word) {

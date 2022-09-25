@@ -76,6 +76,9 @@ export default {
     },
     addHighlight (word) {
       EventBus.$emit('highlight', word);
+      if (!window.location.href.includes('localhost:8080')) {
+        this.$posthog.capture('uncommon word added', { word: word })
+      }
     }
   },
   watch: {
