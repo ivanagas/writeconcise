@@ -16,6 +16,7 @@
             <br><br>It is a nice thing to write very concisely.
             A number of important people think concise writing is pretty great.
             I believe Write Concise will definitely improve your writing.
+            <br><br>Click here and replace all the above text with your own to get started.
           </div>
           <div 
             id="good-input" 
@@ -32,6 +33,8 @@
             <br><br>It is a nice thing to write very concisely.
             A number of important people think concise writing is pretty great.
             I believe Write Concise will definitely improve your writing.
+            <br><br><span @click="clearText" class="text-info clear-text">Click here</span>
+             to clear the text and get started.
           </div>
         </div>
       </div>
@@ -190,6 +193,11 @@ export default {
         return escapeHashMap[match];
       });
     },
+    clearText() {
+      const target = document.getElementById('good-input');
+      target.innerText = ''
+      this.replaceContent()
+    }
   }
 }
 </script>
@@ -247,5 +255,10 @@ export default {
 
   .modal-btn:focus {
     outline: 0;
+  }
+
+  .clear-text:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
 </style>

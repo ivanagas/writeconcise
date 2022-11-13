@@ -10,11 +10,18 @@
           <h5 class="hightlight-btn">
             <span class="text-info" @click="exampleWords">Try It</span>&nbsp;
             <span 
-              v-show="keywordList.length" 
+              v-show="keywordList.length"
               class="text-danger" 
               @click="clear"
             >
               Clear
+            </span>
+            <span 
+              v-show="undoList.length && !keywordList.length"
+              class="text-info" 
+              @click="undo"
+            >
+              Undo
             </span>
           </h5>
         </div>
@@ -28,6 +35,11 @@
               @keydown.188='addKeyword'
               @blur='addKeyword'
             />
+          </div>
+          <div v-if="warning" class="row mt-3">
+            <b-alert class="w-100 mb-2 mr-4 alert-danger" show dismissible @dismissed="clearWarning">
+              {{ warning }}
+            </b-alert>
           </div>
           <div class="row">
             <div 
@@ -50,7 +62,9 @@ import EventBus from './eventbus.js'
 export default {
   data () {
     return {
-      keywordList: []
+      keywordList: [],
+      warning: '',
+      undoList: []
     }
   },
   created() {
@@ -67,7 +81,7 @@ export default {
   methods: {
     addKeyword () {
       event.preventDefault();
-      const val = event.target.value.trim();    
+      const val = event.target.value.trim();
       if (val.length > 0) {
         if (val.includes(", ")) {
           const cleanVals = val.split(', ');
@@ -75,6 +89,9 @@ export default {
         } else {
           if (!this.keywordList.includes(val.toLowerCase())) {
             this.keywordList.unshift(val.toLowerCase());
+            if (val.length > 20) {
+              this.warning = "That's a long keyword to highlight. Did you mean to add it to the editor?"
+            }
           }
         }
         event.target.value = '';
@@ -92,17 +109,18 @@ export default {
         window.localStorage.setItem('keywordList', this.keywordList);
       }
     },
-    removeKeyword (index) {
+    removeKeyword(index) {
       this.keywordList.splice(index, 1);
       this.$emit('keywordChange');
       window.localStorage.setItem('keywordList', this.keywordList);
     },
-    clear () {
+    clear() {
+      this.undoList = this.keywordList;
       this.keywordList = [];
       this.$emit('keywordChange');
       window.localStorage.setItem('keywordList', this.keywordList);
     },
-    exampleWords () {
+    exampleWords() {
       const exWords = ["just", "that", "already", "actual", "think", "pretty", "really", "great", "got", "around", "very", "thing", "much", "fortunate", "nice", "will", "being", "has", "been", "own", "more", "have", "a little", "in order", "a number of", "who are", "who is", "definitely", "important", "able", "look to", "in the future", "would", "could", "without any", "i believe", "it seems"];
       for (let i=0; i < this.keywordList.length; i++) {
         const dupIndex = exWords.indexOf(this.keywordList[i])
@@ -114,6 +132,15 @@ export default {
       this.$emit('keywordChange');
       window.localStorage.setItem('keywordList', this.keywordList);
     },
+    clearWarning() {
+      this.warning = ''
+    },
+    undo() {
+      this.keywordList = this.undoList;
+      this.undoList = [];
+      this.$emit('keywordChange');
+      window.localStorage.setItem('keywordList', this.keywordList);
+    }
   }
 }
 </script>
