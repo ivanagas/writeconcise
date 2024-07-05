@@ -81,6 +81,23 @@
     <!-- Statsig -->
     <script src="https://cdn.jsdelivr.net/npm/@statsig/js-client@1/build/statsig-js-client+session-replay+web-analytics.min.js?apikey=client-qehVDhByfWXjwMAJ5O1gJvEreEVM7Dru9JUvUiY67fx">
     </script>
+
+    <!-- Growthbook -->
+    <script>
+      window.growthbook_config = window.growthbook_config || {};
+      window.growthbook_config.trackingCallback = (experiment, result) => {
+        customEventTracker("Viewed Experiment", {
+          experiment_id: experiment.key,
+          variation_id: result.key
+        })
+      };
+    </script>
+
+    <script async
+      data-api-host="https://cdn.growthbook.io"
+      data-client-key="sdk-EGVpxC44uxzqmDq"
+      src="https://cdn.jsdelivr.net/npm/@growthbook/growthbook/dist/bundles/auto.min.js"
+    ></script>
     
 
 
