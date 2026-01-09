@@ -87,11 +87,12 @@ export default {
     this.replaceContent()
     
     // Listen for pasted content
+    const self = this;
     document.querySelector("div[contenteditable]").addEventListener("paste", function(e) {
       e.preventDefault();
       var text = e.clipboardData.getData("text/plain");
       document.execCommand("insertHTML", false, text);
-      this.replaceContent()
+      self.replaceContent()
     });
     
     window.onbeforeunload = function() {
