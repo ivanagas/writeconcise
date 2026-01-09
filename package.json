@@ -43,6 +43,9 @@
     "last 2 versions",
     "not dead"
   ],
+  "overrides": {
+    "qs": "^6.14.1"
+  },
   "_id": "writerconcise@0.1.1",
   "readme": "ERROR: No README data found!"
 }
