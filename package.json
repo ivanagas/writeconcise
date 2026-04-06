@@ -48,7 +48,8 @@
     "postcss": "^8.4.31",
     "webpack-dev-server": "^5.2.1",
     "cross-spawn": "^7.0.3",
-    "selfsigned": "^5.5.0"
+    "selfsigned": "^5.5.0",
+    "serialize-javascript": "^7.0.5"
   },
   "_id": "writerconcise@0.1.1",
   "readme": "ERROR: No README data found!"
