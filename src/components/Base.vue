@@ -157,10 +157,25 @@ export default {
 
       // If there are highlight keywords
       // Enclose keywords in red underlined <span> tag
-      if (this.$refs.highlight.keywordList.length) {
-        var joinedKeywords = this.$refs.highlight.keywordList.join('\\b|\\b')
-        joinedKeywords = '\\b' + joinedKeywords + '\\b'
-        var keywordRegex = new RegExp(joinedKeywords, 'gi')
+      // Keywords are raw user input, so escape regex metacharacters before
+      // building the pattern. Unescaped "(", ")" etc. threw
+      // "SyntaxError: Invalid regular expression" and killed all highlighting.
+      // Only add \b where the keyword edge is a word character -- a boundary
+      // next to punctuation can never match.
+      const toPattern = function(keyword) {
+        const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        const start = /^\w/.test(keyword) ? '\\b' : ''
+        const end = /\w$/.test(keyword) ? '\\b' : ''
+        return start + escaped + end
+      }
+      // An empty pattern would match at every position, so drop blank
+      // keywords and bail out when nothing usable is left.
+      const keywordPatterns = this.$refs.highlight.keywordList
+        .filter(function(keyword) { return keyword && keyword.length })
+        .map(toPattern)
+
+      if (keywordPatterns.length) {
+        var keywordRegex = new RegExp(keywordPatterns.join('|'), 'gi')
 
         replaceContent = replaceContent.replace(keywordRegex, function(match) {
           const result = '<span class="text-danger border-bottom border-danger">' + match + '</span>'
@@ -172,14 +187,13 @@ export default {
       insertNode.innerHTML = replaceContent
       
       // Count number of words highlighted
-      if (this.$refs.highlight.keywordList.length == 0) {
-        this.highlightedWordCount = 0
-      }
-      if (this.$refs.highlight.keywordList.length) {
+      if (keywordPatterns.length) {
         const count = (str) => {
           return ((str || '').match(keywordRegex) || []).length
         }
         this.highlightedWordCount = count(replaceContent)
+      } else {
+        this.highlightedWordCount = 0
       }
 
     },
