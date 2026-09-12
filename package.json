@@ -13,7 +13,7 @@
     "core-js": "^3.23.3",
     "posthog-js": "^1.31.0",
     "sass-loader": "^10.3.0",
-    "vue": "^2.7.2"
+    "vue": "^3.5.42"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^5.0.8",
