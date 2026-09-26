@@ -11,7 +11,7 @@
     "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.50.0",
-    "posthog-js": "^1.433.5",
+    "posthog-js": "^1.434.9",
     "sass-loader": "^10.3.0",
     "vue": "^2.7.2"
   },
@@ -19,7 +19,7 @@
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
-    "@babel/eslint-parser": "^7.25.9",
+    "@babel/eslint-parser": "^7.29.9",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.20.0",
     "vue-template-compiler": "^2.7.16"
