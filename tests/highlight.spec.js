@@ -134,3 +134,24 @@ test.describe('more checks', () => {
     await expect(page.locator('#lyWordsSwitch')).not.toBeChecked()
   })
 })
+
+test('typing a comma adds the keyword', async ({ page }) => {
+  await openApp(page)
+  await clearEditor(page)
+  await page.keyboard.type('good and nice')
+  const input = page.getByPlaceholder('Enter a word or phrase')
+  await input.click()
+  await input.pressSequentially('nice,')
+  await expect(input).toHaveValue('')
+  await expect(page.locator('.keyword-input__keyword', { hasText: 'nice' })).toBeVisible()
+  await expect(danger(page)).toHaveText(['nice'])
+})
+
+test('long keyword shows a dismissible warning', async ({ page }) => {
+  await openApp(page)
+  await addKeyword(page, 'this is a really long keyword phrase')
+  const alert = page.locator('.alert-danger')
+  await expect(alert).toContainText("That's a long keyword")
+  await alert.locator('.close').click()
+  await expect(alert).toHaveCount(0)
+})

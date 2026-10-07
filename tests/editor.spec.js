@@ -107,3 +107,22 @@ test.describe('pasting', () => {
     expect(Math.abs(editorHeight - overlayHeight)).toBeLessThanOrEqual(2)
   })
 })
+
+test('About opens and closes the modal', async ({ page }) => {
+  await page.getByText('About', { exact: true }).click()
+  const dialog = page.getByRole('dialog')
+  await expect(dialog).toBeVisible()
+  await expect(dialog).toContainText('What is Write Concise?')
+  await expect(dialog.getByRole('link', { name: 'Writing, Briefly by Paul Graham' })).toBeVisible()
+  await dialog.getByRole('button', { name: 'Close' }).click()
+  await expect(dialog).toBeHidden()
+})
+
+test('sidebar sections collapse and expand', async ({ page }) => {
+  const input = page.getByPlaceholder('Enter a word or phrase')
+  await expect(input).toBeVisible()
+  await page.locator('h4', { hasText: 'Highlight' }).click()
+  await expect(input).toBeHidden()
+  await page.locator('h4', { hasText: 'Highlight' }).click()
+  await expect(input).toBeVisible()
+})
