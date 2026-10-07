@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="row">
-      <h4 v-b-toggle.word-count class="word-count">Word Count</h4>
+      <h4 role="button" :aria-expanded="open" @click="open = !open" class="word-count">Word Count</h4>
     </div>
-      <b-collapse id="word-count">
+      <div v-show="open" id="word-count">
         <div class="row">
           <h5>
             Total: <span class="text-info">{{wordCount}}</span>
@@ -14,7 +14,7 @@
             Highlighted: <span class="text-info">{{highlightedWordCount}}</span>
           </h5> 
         </div>
-      </b-collapse>
+      </div>
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
   props: ['wordArray', 'highlightedWordCount'],
   data () {
     return {
+      open: false,
       wordCount: 0
     }
   },

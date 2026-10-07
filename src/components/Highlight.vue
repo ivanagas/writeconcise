@@ -1,11 +1,11 @@
 <template>
     <div>
       <div class="row">
-        <h4 v-b-toggle.highlight class="highlight">
+        <h4 role="button" :aria-expanded="open" @click="open = !open" class="highlight">
           Highlight
         </h4>
       </div>
-      <b-collapse visible id="highlight">
+      <div v-show="open" id="highlight">
         <div class="row">
           <h5 class="hightlight-btn">
             <span class="text-info" @click="exampleWords">Try It</span>&nbsp;
@@ -32,14 +32,15 @@
               placeholder="Enter a word or phrase" 
               class='keyword-input__text p-2' 
               @keydown.enter='addKeyword' 
-              @keydown.188='addKeyword'
+              @keydown="$event.key === ',' && addKeyword($event)"
               @blur='addKeyword'
             />
           </div>
           <div v-if="warning" class="row mt-3">
-            <b-alert class="w-100 mb-2 mr-4 alert-danger" show dismissible @dismissed="clearWarning">
+            <div class="alert alert-danger alert-dismissible w-100 mb-2 mr-4" role="alert">
               {{ warning }}
-            </b-alert>
+              <button type="button" class="close" aria-label="Close" @click="clearWarning">&times;</button>
+            </div>
           </div>
           <div class="row">
             <div 
@@ -52,7 +53,7 @@
             </div>
           </div>
         </div>
-      </b-collapse>
+      </div>
     </div>
 </template>
 
@@ -62,6 +63,7 @@ import EventBus from './eventbus.js'
 export default {
   data () {
     return {
+      open: true,
       keywordList: [],
       warning: '',
       undoList: []
@@ -74,12 +76,13 @@ export default {
     }
   },
   mounted() {
-    EventBus.$on('highlight', word => {
-      this.addCleanKeyword(word);
-    });
+    EventBus.$on('highlight', this.addCleanKeyword);
+  },
+  beforeUnmount() {
+    EventBus.$off('highlight', this.addCleanKeyword);
   },
   methods: {
-    addKeyword () {
+    addKeyword (event) {
       event.preventDefault();
       const val = event.target.value.trim();
       if (val.length > 0) {

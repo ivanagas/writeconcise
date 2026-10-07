@@ -31,7 +31,7 @@ async function expectInSync(page) {
       editor(page).evaluate(el => el.innerText),
       overlay(page).evaluate(el => el.innerText),
     ])
-    const norm = s => s.replace(/ /g, ' ').replace(/\n+/g, '\n').trim()
+    const norm = s => s.replace(/\u00a0/g, ' ').replace(/\n+/g, '\n').trim()
     return norm(a) === norm(b) ? 'in sync' : `editor=${JSON.stringify(a)} overlay=${JSON.stringify(b)}`
   }).toBe('in sync')
 }

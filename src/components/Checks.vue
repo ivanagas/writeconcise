@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="row">
-      <h4 v-b-toggle.checks class="checks">
+      <h4 role="button" :aria-expanded="open" @click="open = !open" class="checks">
         More Checks
       </h4>
     </div>
-    <b-collapse id="checks">
+    <div v-show="open" id="checks">
       <div class="row">
         <div class="custom-control custom-switch">
           <input 
@@ -38,7 +38,7 @@
           </label>
         </div>
       </div>
-    </b-collapse>
+    </div>
   </div>
 </template>
 
@@ -46,6 +46,7 @@
 export default {
   data () {
     return {
+      open: false,
       highlightContractions: false,
       highlightLyWords: false
     }

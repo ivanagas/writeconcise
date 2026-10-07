@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="row">
-      <h4 v-b-toggle.uncommon class="underline">
+      <h4 role="button" :aria-expanded="open" @click="open = !open" class="underline">
         Uncommon Words
       </h4>
     </div>
-    <b-collapse visible id="uncommon">
+    <div v-show="open" id="uncommon">
       <div class="row pb-3">
         <div 
           v-for="word in mostUncommon" 
@@ -16,7 +16,7 @@
           + {{ word[0] }} ({{word[1]}})
         </div>
       </div>
-    </b-collapse>
+    </div>
   </div>
 </template>
 
@@ -29,6 +29,7 @@ export default {
   props: ['wordArray'],
   data () {
     return {
+      open: true,
       uncommonWords: {},
       mostUncommon: []
     }

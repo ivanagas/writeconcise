@@ -2,7 +2,7 @@
   <div>
     <div class="pt-4 pb-3 pl-4">
       <h3>Write Concise</h3> 
-      <h5 class="text-info"><span class="modal-btn" v-b-modal.modal-1>About</span></h5>
+      <h5 class="text-info"><span class="modal-btn" @click="showModal = true">About</span></h5>
     </div>
     <div class="row justify-content-between">
       <div class="col-md-8 col-lg-7 mb-5">
@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="row"><br><br></div>
-    <modal />
+    <modal :show="showModal" @close="showModal = false" />
   </div>
 </template>
 
@@ -71,7 +71,8 @@ export default {
   data () {
     return {
       wordArray: [],
-      highlightedWordCount: 0
+      highlightedWordCount: 0,
+      showModal: false
     }
   },
   mounted() {
