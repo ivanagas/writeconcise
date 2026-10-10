@@ -9,3 +9,12 @@ updates:
       all-minor-patch:
         patterns: ["*"]
         update-types: ["minor", "patch"]
+    # The lint toolchain is pinned by Vue CLI 5 (Babel 7, eslintrc config).
+    # These majors can't install on their own and need a flat-config migration.
+    ignore:
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint-plugin-vue"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@babel/eslint-parser"
+        update-types: ["version-update:semver-major"]
