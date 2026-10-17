@@ -11,9 +11,9 @@
   "dependencies": {
     "bootstrap": "^4.6.1",
     "core-js": "^3.50.0",
-    "posthog-js": "^1.438.6",
+    "posthog-js": "^1.438.9",
     "sass-loader": "^10.3.0",
-    "vue": "^3.5.43"
+    "vue": "^3.5.44"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.29.9",
