@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "bootstrap": "^4.6.1",
-    "core-js": "^3.50.0",
-    "posthog-js": "^1.438.9",
+    "core-js": "^3.51.0",
+    "posthog-js": "^1.438.13",
     "sass-loader": "^10.3.0",
     "vue": "^3.5.44"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.29.9",
-    "@playwright/test": "^1.64.0",
+    "@playwright/test": "^1.64.1",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-service": "^5.0.8",
