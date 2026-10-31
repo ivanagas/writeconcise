@@ -11,7 +11,7 @@
   "dependencies": {
     "bootstrap": "^4.6.1",
     "core-js": "^3.51.0",
-    "posthog-js": "^1.438.13",
+    "posthog-js": "^1.440.0",
     "sass-loader": "^10.3.0",
     "vue": "^3.5.44"
   },
